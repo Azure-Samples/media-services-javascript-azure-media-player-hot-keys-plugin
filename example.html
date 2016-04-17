@@ -1,114 +1,54 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
-    <title>Video.js Hotkeys</title>
-    <link href="https://vjs.zencdn.net/5.0/video-js.css" rel="stylesheet">
-    <script src="https://vjs.zencdn.net/5.0/video.js"></script>
-    <style>
-      .video-js .vjs-menu-button-inline {
-        width: 12em;
-      }
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Azure Media Player</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      .vjs-menu-button-inline .vjs-menu {
-        display: block;
-        opacity: 1;
-      }
-    </style>
-  </head>
-  <body>
-    <div>
-      You can see the Video.js Hotkeys plugin in use below.
-      Look at the source to see how to use it with your own videos.
-    </div>
+    <!--*****START OF Azure Media Player Scripts*****-->
+    <!--Note: DO NOT USE the "latest" folder in production. Replace "latest" with a version number like "1.0.0"-->
+    <!--EX:<script src="//amp.azure.net/libs/amp/1.0.0/azuremediaplayer.min.js"></script>-->
+    <!--Azure Media Player versions can be queried from //amp.azure.net/libs/amp/latest/docs/changelog.html-->
+    <script src="//amp.azure.net/libs/amp/latest/azuremediaplayer.min.js"></script>
+    <link href="//amp.azure.net/libs/amp/latest/skins/amp-default/azuremediaplayer.min.css" rel="stylesheet">
+    <!--*****END OF Azure Media Player Scripts*****-->
 
-    <video id="video1" class="video-js vjs-default-skin vjs-big-play-centered" height="300" width="600" controls data-setup="{}">
-      <source src="http://vjs.zencdn.net/v/oceans.mp4" type='video/mp4'>
-      <source src="http://vjs.zencdn.net/v/oceans.webm" type='video/webm'>
-      <source src="http://vjs.zencdn.net/v/oceans.ogv" type='video/ogg'>
-      <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that
-        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
-    </video>
+    <!--Add Plugins-->
+    <script src="hotkeys.js"></script>
 
-    <script src="videojs.hotkeys.js"></script>
+</head>
+<body>
+    <h1>Plugin - Hot Keys</h1>
+    <video id="azuremediaplayer" class="azuremediaplayer amp-default-skin amp-big-play-centered" tabindex="0"> </video>
     <script>
-      // initialize the plugin
-      videojs('video1').ready(function() {
-        this.hotkeys({
-          volumeStep: 0.1,
-          seekStep: 5,
-          enableMute: true,
-          enableFullscreen: true,
-          enableVolumeScroll: true,
-
-          // Enhance existing simple hotkey with a complex hotkey
-          fullscreenKey: function(e) {
-            // fullscreen with the F key or Ctrl+Enter
-            return ((e.which === 70) || (e.ctrlKey && e.which === 13));
-          },
-
-          // Custom Keys
-          customKeys: {
-
-            // Add new simple hotkey
-            simpleKey: {
-              key: function(e) {
-                // Toggle something with S Key
-                return (e.which === 83);
-              },
-              handler: function(player, options) {
-                // Example
-                if (player.paused()) {
-                  player.play();
-                } else {
-                  player.pause();
+        var myOptions = {
+            autoplay: true,
+            controls: true,
+            width: "640",
+            height: "400",
+            poster: "",
+            plugins: {
+                hotkeys: {
+                    //optional settings
+                    "volumeStep": 0.1,
+                    "seekStep": 5,
+                    "enableMute": true,
+                    "enableFullscreen": true,
+                    "enableNumbers": true,
+                    "enableJogStyle": false
                 }
-              }
-            },
-
-            // Add new complex hotkey
-            complexKey: {
-              key: function(e) {
-                // Toggle something with CTRL + D Key
-                return (e.ctrlKey && e.which === 68);
-              },
-              handler: function(player, options) {
-                // Example
-                if (options.enableMute) {
-                  player.muted(!player.muted());
-                }
-              }
-            },
-
-            emptyHotkey: {
-              // Empty
-            },
-
-            withoutKey: {
-              handler: function(player, options) {
-                  console.log('withoutKey handler');
-              }
-            },
-
-            withoutHandler: {
-              key: function(e) {
-                  return true;
-              }
-            },
-
-            malformedKey: {
-              key: function() {
-                console.log('I have a malformed customKey. The Key function must return a boolean.');
-              },
-              handler: function(player, options) {
-                //Empty
-              }
             }
-
-          }
-
-        });
-      });
+        };
+        var myPlayer = amp("azuremediaplayer", myOptions);
+        myPlayer.src([{ src: "//amssamples.streaming.mediaservices.windows.net/91492735-c523-432b-ba01-faba6c2206a2/AzureMediaServicesPromo.ism/manifest", type: "application/vnd.ms-sstr+xml" }, ]);
     </script>
-  </body>
+    <footer>
+        <br />
+
+        <p>© Microsoft Corporation 2016</p>
+    </footer>
+
+</body>
 </html>
