@@ -1,7 +1,12 @@
 ---
-services: media-services
-platforms: javascript
-author: rajputam
+page_type: sample
+languages:
+- javascript
+- html
+products:
+- azure
+description: "This project is out of date as this plugin has been integrated directly into the release of Azure Media Player as of version 1.6.0.  This repository is kept active for reference purposes."
+urlFragment: media-services-javascript-azure-media-player-hot-keys-plugin
 ---
 
 # Media Services: Hot Keys Plugin for Azure Media Player
