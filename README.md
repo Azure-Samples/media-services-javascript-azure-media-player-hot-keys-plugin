@@ -43,7 +43,7 @@ Include the plugin *after* the AMP script in the `<head>` of your html page:
 <script src="hotkeys.js"></script>
 ```
 
-See example.html for how to enable the plugin and add [Options](#options)
+See `example.html` for how to enable the plugin and add [Options](#options)
 
 ## Options
 
